@@ -121,12 +121,13 @@ public class Cliente {
 		if (dni == null) { throw new NullPointerException("ERROR: El dni de un cliente no puede ser nulo.");}
 		if (dni.equals("")) { throw new IllegalArgumentException("ERROR: El dni del cliente no tiene un formato válido.");}
 		else if (!dni.matches(ER_DNI)) { throw new IllegalArgumentException("ERROR: El dni del cliente no tiene un formato válido.");}
-		else {this.dni = dni;};}/*HABRIA QUE HACER MENCION AL METODO COMPROBAR DNI*/
+		else {this.dni = dni;};}
 	
 	
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		if (fechaNacimiento==null) { throw new IllegalArgumentException ("ERROR: Debe introducir una fecha de nacimiento");}
-		this.fechaNacimiento = fechaNacimiento;} 
+		if (fechaNacimiento.equals("")) { throw new IllegalArgumentException("ERROR: La fecha de nacimiento del cliente no tiene un formato válido.");}
+		else {this.fechaNacimiento = fechaNacimiento;}}
 
 	
 	public void setNombre(String nombre){
@@ -135,13 +136,16 @@ public class Cliente {
 		boolean caracteres=true;
 		boolean espacio = false;
 		String nombreConvertido = "";
-
-		do { for (int i=0;i<nombre.length();i++) {
+		
+		if (nombre==null) { throw new IllegalArgumentException ("ERROR: Debe introducir el nombre");}
+		if (nombre.equals("")) { throw new IllegalArgumentException("ERROR: El nombre del cliente no tiene un formato válido.");}
+		else {		
+			do { for (int i=0;i<nombre.length();i++) {
 			if ((nombre.charAt(i)<='Z' && nombre.charAt(i)>='A')||nombre.charAt(i)==' '
 				||(nombre.charAt(i)>='a' && nombre.charAt(i)<='z')
 				||(nombre.charAt(i) == 'á')||(nombre.charAt(i) == 'é')||(nombre.charAt(i) == 'í')
 				||(nombre.charAt(i) == 'ó')||(nombre.charAt(i) == 'ú'))
-			{
+				{
 				caracteres=true;
 				
 				if (i == 0 || espacio == true) {
@@ -156,15 +160,15 @@ public class Cliente {
 				if (nombre.charAt(i) == ' ') {
 					espacio = true;
 				}
-			}
-			else {
+				}
+				else {
 				caracteres=false; System.out.println("nombre erroneo");
-			}}} while (!caracteres);
+				}}} while (!caracteres);
 		
 	
-		if (caracteres == true) {
+			if (caracteres == true) {
 			this.nombre=nombreConvertido;
-		}
+		}}
 	}
 		
 
@@ -180,7 +184,7 @@ public class Cliente {
 		
 		
 		return "nombre=" + nombre + "(" + getIniciales() + "), DNI=" + dni + ", correo=" + correo + ", telefono=" + telefono
-				+ ", fechaNacimiento=" + fechaConvertida;
+				+ ", fechaNacimiento=" + fechaNacimiento;
 	}
 }
 

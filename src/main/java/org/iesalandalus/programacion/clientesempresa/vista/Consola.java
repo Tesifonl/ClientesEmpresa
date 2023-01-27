@@ -15,9 +15,6 @@ public class Consola {
 	
 	public Consola() {}
 	
-	/* ES UNA CLASE QUE SOLO TIENE UTILIDADES METODOS. NO TIENE SENTIDO CREAR OBJETOS PARA LLAMAR A LOS METODOS.
-	 *  POR LO TANTO SE CREAN TODOS SUS METODOS COMO ESTATICOS
-	 */
 	
 	public void mostrarMenu() {
 		
@@ -51,6 +48,8 @@ public class Consola {
 		
 		Cliente cliente=null;
 		
+		try {
+		
 		System.out.println(" Introduce el nombre del cliente");
 		String nombre=Entrada.cadena();
 		
@@ -71,14 +70,15 @@ public class Consola {
 		String telefono= Entrada.cadena();
 		
 
-		if (nombre.isEmpty() || dni.isEmpty() || correo.isEmpty() || telefono.isEmpty() ||fechaConvertida.toString().isEmpty()) {
-			throw new NullPointerException (" error en los datos de entrada");}
+		cliente= new Cliente (nombre, dni, correo, telefono, fechaConvertida);}
+		
+		catch (IllegalArgumentException | NullPointerException e) {
 			
-			else {cliente= new Cliente (nombre, dni, correo, telefono, fechaConvertida);}
+			System.out.print("ERROR: Faltan datos obligatorios para el alta");
+		}
+		return cliente;}
+		 
 		
-		return cliente;
-		
-	}
 	
 	public Cliente leerClienteDni () {
 		Cliente cliente=null;

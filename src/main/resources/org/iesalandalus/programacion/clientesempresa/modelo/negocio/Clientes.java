@@ -72,9 +72,9 @@ public class Clientes {
 
 	
 	private Cliente [] copiaProfundaClientes () {
-		Cliente [] copiaProfunda=new Cliente[this.tamano]; /* AQUI CREO EL ARRAY*/
+		Cliente [] copiaProfunda=new Cliente[this.tamano]; 
 		for (int i=0; i<tamano;i++) {
-			copiaProfunda [i]=new Cliente(this.clientes[i]);/*AQUI LO RELLENO DE DATOS*/
+			copiaProfunda [i]=new Cliente(this.clientes[i]);
 		}
 		return copiaProfunda;
 		
